@@ -107,9 +107,3 @@ usair1['src'] = src
 usair1['dst'] = dst
 usair1['label'] = label
 usair1.to_csv('./划分数据/netscience_usair_test10.csv',index = False)
-
-
-
-
-
-
