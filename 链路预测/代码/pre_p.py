@@ -21,5 +21,3 @@ auc1 = roc_auc_score(label,pre1)
 auc2 = roc_auc_score(label,pre2)
 print('auc_M1:',auc1)
 print('auc_M2:',auc2)
-
-

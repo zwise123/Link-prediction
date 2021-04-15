@@ -334,14 +334,14 @@ def four_six2_morphology(u,v,g):
 
 
 G = nx.read_edgelist('权重预测/数据/权重归一化后数据/geom_weight.txt', nodetype=int, data=(('weight',float),))
-G1 = nx.read_edgelist('geom_test1.txt', nodetype=int, data=(('weight',float),))
+G1 = nx.read_edgelist('geom_test_random.csv', nodetype=int, data=(('weight',float),))
 for edge in G1.edges():
     G[edge[0]][edge[1]]['weight'] = 0
     
 G = G.to_undirected()
 edge_all = G.edges()
 
-sf_links = pd.read_csv('geom_test1.csv')
+sf_links = pd.read_csv('geom_test_random.csv')
 
 sf_links['M1'] = sf_links[['src','dst']].apply(lambda r: three_one_morphology(r['src'], r['dst'],G), axis =1)
 sf_links['M2'] = sf_links[['src','dst']].apply(lambda r: three_two_morphology(r['src'], r['dst'],G), axis =1)
@@ -359,7 +359,7 @@ sf_links['M12'] = sf_links[['src','dst']].apply(lambda r: four_five2_morphology(
 
 sf_links.to_csv('geomw_4morj_test_final1.csv',index = None)
     
-sf_links1 = pd.read_csv('geom_train1.csv')
+sf_links1 = pd.read_csv('geom_train_random.csv')
 
 sf_links1['M1'] = sf_links1[['src','dst']].apply(lambda r: three_one_morphology(r['src'], r['dst'],G), axis =1)
 sf_links1['M2'] = sf_links1[['src','dst']].apply(lambda r: three_two_morphology(r['src'], r['dst'],G), axis =1)

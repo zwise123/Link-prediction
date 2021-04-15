@@ -79,18 +79,27 @@ num_list = []
 for i in range(10):
     num_list.append(i)
 
-for qq in num_list:        
-    G = nx.read_edgelist('geom_weight.txt', nodetype=int, data=(('weight',float),))
-    G1 = nx.read_edgelist('geom_test1'+str(qq)+'.txt', nodetype=int, data=(('weight',float),))
-    for edge in G1.edges():
-        G[edge[0]][edge[1]]['weight'] = 0
-    
-    G = G.to_undirected()
+# for qq in num_list:        
+G = nx.read_edgelist('权重预测/数据/权重归一化后数据/USAir.txt', nodetype=int, data=(('weight',float),))
+G1 = nx.read_edgelist('usa_test_random.csv', nodetype=int, data=(('weight',float),))
+for edge in G1.edges():
+    G[edge[0]][edge[1]]['weight'] = 0
 
-    sf_links = pd.read_csv('geom_test1'+str(qq)+'.csv')
+G = G.to_undirected()
 
-    sf_links['rWCN'] = sf_links[['src','dst']].apply(lambda r: rWCN(r['src'], r['dst'],G), axis =1)
-    sf_links['rWAA'] = sf_links[['src','dst']].apply(lambda r: rWAA(r['src'], r['dst'],G), axis =1)
-    sf_links['rWRA'] = sf_links[['src','dst']].apply(lambda r: rWRA(r['src'], r['dst'],G), axis =1)
+sf_links = pd.read_csv('usa_test_random.csv')
 
-    sf_links.to_csv('geomw_rw_test_final1'+str(qq)+'.csv',index = None)
+sf_links['rWCN'] = sf_links[['src','dst']].apply(lambda r: rWCN(r['src'], r['dst'],G), axis =1)
+sf_links['rWAA'] = sf_links[['src','dst']].apply(lambda r: rWAA(r['src'], r['dst'],G), axis =1)
+sf_links['rWRA'] = sf_links[['src','dst']].apply(lambda r: rWRA(r['src'], r['dst'],G), axis =1)
+
+sf_links.to_csv('usa_rw_test_final1.csv',index = None)
+
+
+sf_links = pd.read_csv('usa_train_random.csv')
+
+sf_links['rWCN'] = sf_links[['src','dst']].apply(lambda r: rWCN(r['src'], r['dst'],G), axis =1)
+sf_links['rWAA'] = sf_links[['src','dst']].apply(lambda r: rWAA(r['src'], r['dst'],G), axis =1)
+sf_links['rWRA'] = sf_links[['src','dst']].apply(lambda r: rWRA(r['src'], r['dst'],G), axis =1)
+
+sf_links.to_csv('usa_rw_train_final1.csv',index = None)

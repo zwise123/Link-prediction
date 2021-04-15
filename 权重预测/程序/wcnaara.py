@@ -78,23 +78,27 @@ num_list = []
 for i in range(10):
     num_list.append(i)
 
-for qq in num_list:
-    G = nx.read_edgelist('geom_weight.txt', nodetype=int, data=(('weight',float),))
-    G1 = nx.read_edgelist('geom_test1'+str(qq)+'.txt', nodetype=int, data=(('weight',float),))
-    for edge in G1.edges():
-        G[edge[0]][edge[1]]['weight'] = 0
-    
+# for qq in num_list:
+G = nx.read_edgelist('权重预测/数据/权重归一化后数据/USAir.txt', nodetype=int, data=(('weight',float),))
+G1 = nx.read_edgelist('usa_test_random.csv', nodetype=int, data=(('weight',float),))
+for edge in G1.edges():
+    G[edge[0]][edge[1]]['weight'] = 0
+
 #g= nx.read_edgelist("condmat_edge_part.txt",nodetype=int)
-    G = G.to_undirected()
+G = G.to_undirected()
 
 #sf_links = pd.read_csv('graph_train_random.csv')
-    sf_links = pd.read_csv('geom_test1'+str(qq)+'.csv')
-    sf_links['WAA'] = sf_links[['src','dst']].apply(lambda r: WAA(r['src'], r['dst'],G), axis =1)
-    sf_links['WRA'] = sf_links[['src','dst']].apply(lambda r: WRA(r['src'], r['dst'],G), axis =1)
-    sf_links['WCN'] = sf_links[['src','dst']].apply(lambda r: wcommon_friends(r['src'], r['dst'],G), axis =1)
-    sf_links.to_csv('geomw_wcnaara_test_final1'+str(qq)+'.csv',index = None)
+sf_links = pd.read_csv('usa_test_random.csv')
+sf_links['WAA'] = sf_links[['src','dst']].apply(lambda r: WAA(r['src'], r['dst'],G), axis =1)
+sf_links['WRA'] = sf_links[['src','dst']].apply(lambda r: WRA(r['src'], r['dst'],G), axis =1)
+sf_links['WCN'] = sf_links[['src','dst']].apply(lambda r: wcommon_friends(r['src'], r['dst'],G), axis =1)
+sf_links.to_csv('usa_wcnaara_test_final1',index = None)
 
-
+sf_links = pd.read_csv('usa_train_random.csv')
+sf_links['WAA'] = sf_links[['src','dst']].apply(lambda r: WAA(r['src'], r['dst'],G), axis =1)
+sf_links['WRA'] = sf_links[['src','dst']].apply(lambda r: WRA(r['src'], r['dst'],G), axis =1)
+sf_links['WCN'] = sf_links[['src','dst']].apply(lambda r: wcommon_friends(r['src'], r['dst'],G), axis =1)
+sf_links.to_csv('usa_wcnaara_train_final1',index = None)
 
 
 

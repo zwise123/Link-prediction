@@ -13,7 +13,7 @@ import numpy as np
 import math
 
  
-G = nx.read_edgelist('权重预测/数据/权重归一化后数据/netscience_weight2.txt', nodetype=int, data=(('weight',float),))
+G = nx.read_edgelist('权重预测/数据/权重归一化后数据/USAir.txt', nodetype=int, data=(('weight',float),))
     
 G = G.to_undirected()
 
@@ -42,7 +42,7 @@ usair = pd.DataFrame()
 usair['src'] = src_train
 usair['dst'] = dst_train
 usair['label'] = label_train
-usair.to_csv('权重预测/net_train_random.csv',index = False)
+usair.to_csv('./usa_train_random.csv',index = False)
 ####################测试集#################################
            
 src = pos_src[:pos_num] 
@@ -53,4 +53,4 @@ usair = pd.DataFrame()
 usair['src'] = src
 usair['dst'] = dst
 usair['label'] = label
-usair.to_csv('权重预测/net_test_random.csv',index = False)      
+usair.to_csv('./usa_test_random.csv',index = False)      

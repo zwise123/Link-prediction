@@ -409,7 +409,7 @@ sf_links.to_csv('netsciencew_linkmorj_train_final1.csv',index = None)
 
 sf_links1 = pd.read_csv('./划分数据/netscience_usair_test10.csv')
 
-sf_links1['M1'] = sf_links1[['src','dst']].apply(lambda r: three_one_morphology(r['src'], r['dst'], G),axis = 1)
+sf_links1['M1'] = sf_links1[['src','dst']].apply(lambda r: thre  他 xdse_one_morphology(r['src'], r['dst'], G),axis = 1)
 sf_links1['M2'] = sf_links1[['src','dst']].apply(lambda r: three_two_morphology(r['src'], r['dst'], G),axis = 1) 
 sf_links1['M3'] = sf_links1[['src','dst']].apply(lambda r: four_one_morphology(r['src'], r['dst'], G),axis = 1)
 sf_links1['M4'] = sf_links[['src','dst']].apply(lambda r: four_two_morphology(r['src'], r['dst'], G),axis = 1)

@@ -11,12 +11,12 @@ import sys,random
 import numpy as np
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import mean_squared_error
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 
 
     
-train = pd.read_csv('geomw_4morj_train_final19.csv')
-test = pd.read_csv('geomw_4morj_test_final19.csv')
+train = pd.read_csv('usa_rw_test_final1.csv')
+test = pd.read_csv('usa_rw_train_final1.csv')
  
 y,val = train_test_split(train, test_size = 0.1,random_state=1)
 test_IMSI = test['src']
@@ -31,22 +31,23 @@ tests = test[feature_name_test]
 trains = train[feature_name_train]
 va = val[feature_name_val]
 
+
 list_rmse = []
 def pipeline(iteration,random_seed,max_depth,min_child_weight):
     dtest = xgb.DMatrix(tests)
     dtrain = xgb.DMatrix(trains, label = y)
     dval = xgb.DMatrix(va, label = val_y)
     params={
-    	'booster':'gbtree',
+     	'booster':'gbtree',
         'objective': 'reg:squarederror',
-    	'gamma':0.0,
-    	'max_depth':max_depth,
-    	'lambda':1,
+     	'gamma':0.0,
+     	'max_depth':max_depth,
+     	'lambda':1,
         'subsample':subsample,
         'colsample_bytree':colsample_bytree,
         'min_child_weight':min_child_weight,  
         'eta': 0.01,
-    	'seed':random_seed, 
+     	'seed':random_seed, 
         'eval_metric':'rmse'
         }
     
